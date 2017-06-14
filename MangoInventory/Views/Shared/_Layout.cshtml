@@ -1,0 +1,207 @@
+﻿@{
+
+    //var message;
+    int loggedIn = 0;
+    int eId = 0;
+    int adminId = 0;
+    HttpContext context = System.Web.HttpContext.Current;
+    HttpCookie cookie = context.Request.Cookies["loginCookie"];
+    if (cookie != null)
+    {
+        try
+        {
+            loggedIn = Convert.ToInt32(cookie["loginStatus"]);
+            eId = Convert.ToInt32(cookie["eId"]);
+            if (cookie["adminId"] != null)
+            {
+                adminId = Convert.ToInt32(cookie["adminId"]);
+            }
+        }
+        catch (Exception e)
+        {
+            TempData["message"] = e.Message;
+            //throw;
+        }
+
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - mango inventory</title>
+
+    <link href="~/Content/w3.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/w3.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    @*<link rel="stylesheet" href="/lib/w3-theme-teal.css">*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    @*<link rel="stylesheet" href="/lib/w3-theme-teal.css">*@
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="http://it.allfont.net/allfont.css?fonts=matura-mt-script-capitals" rel="stylesheet" type="text/css" />
+    <link href="~/Scripts/summernote/summernote.css" rel="stylesheet" />
+    <link href="~/Content/w3.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+        }
+
+        .w3-bar-block .w3-bar-item {
+            padding: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <br />
+    <br />
+    <div class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="container">
+
+
+            <div class="navbar-header navigator">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    @*@Html.ActionLink("invoice atl", "Index", "Home", null, new { @class = "image-icon" })*@
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+
+                </button>
+                @if (loggedIn != 0)
+                {
+
+                    <button id="sidebarButton" class="navigator dropdown-toggle"> <a><i class="fa fa-bars " id="sidebarButton6" style="color: white"></i></a></button>
+                    <span class="w3-bar-item"></span>
+                }
+
+                <img src="~/Content/themes/base/images/mango.png" height="50" width="50" />
+                <b style="font-family: Matura MT Script Capitals; color: #556b2f; font-size: 18px; font-weight: lighter">@Html.ActionLink("mango-inventory", "Index", "Home")</b>
+
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav"></ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+
+        </div>
+
+        <div>
+            <nav class="w3-sidebar w3-animate-left w3-bar-block w3-card w3-display-position" style="max-height: 580px; overflow-y: scroll" id="mySidebar">
+                <div class="w3-container w3-theme-d2">
+                    <span onclick="closeSidebar()" class="w3-button w3-display-topright w3-large">x</span>
+                </div>
+                <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="#"> <img src="~/Images/web_logo.png" height="40" width="150" style="background-color: black" /></a>
+                <a class="w3-bar-item w3-button w3-animate-bottom" onclick="myAccordion('catDiv')" href="javascript:void(0)">
+                    Category
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <div id="catDiv" class="w3-hide w3-animate-left">
+                    <ul>@Html.ActionLink("New Subcategory", "Create", "SubCategory")</ul>
+                    <ul>@Html.ActionLink("New Types", "Create", "Type")</ul>
+                    <ul>@Html.ActionLink("Types", "Index", "Type")</ul>
+                </div>
+                <a class="w3-bar-item w3-button w3-animate-bottom" onclick="myAccordion('productDiv')" href="javascript:void(0)">
+                    Product
+                    <i class="fa fa-caret-down w3-animate-bottom"></i>
+                </a>
+                <div id="productDiv" class="w3-hide w3-animate-left">
+                    <ul>@Html.ActionLink("Products", "Index", "Product")</ul>
+                    <ul>@Html.ActionLink("New Product", "Create", "Product")</ul>
+                    <ul>@Html.ActionLink("Stock", "Index", "Stock")</ul>
+                </div>
+                <a class="w3-bar-item w3-button w3-animate-bottom" onclick="myAccordion('MrDiv')" href="javascript:void(0)">
+                    Material Receive
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <div id="MrDiv" class="w3-hide w3-animate-left">
+                    <ul>@Html.ActionLink("New MR", "Create", "MR")</ul>
+                    <ul>@Html.ActionLink("MR(s)", "Index", "MR")</ul>
+                </div>
+                <a class="w3-bar-item w3-button w3-animate-bottom" onclick="myAccordion('quoteDiv')" href="javascript:void(0)">
+                    Quotation
+                    <i class="fa fa-caret-down w3-animate-top"></i>
+                </a>
+                <div id="quoteDiv" class="w3-hide w3-animate-left">
+                    <ul>@Html.ActionLink("New Quotation", "Create", "Quotation")</ul>
+
+                </div>
+                <a class="w3-bar-item w3-button w3-animate-bottom" onclick="myAccordion('requistionDiv')" href="javascript:void(0)">
+                    Requisition
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                @*<div id="requistionDiv" class="w3-hide w3-animate-left">
+                    <ul>@Html.ActionLink("Requisition", "Requisite", "Re")</ul>
+
+                </div>*@
+
+            </nav>
+
+        </div>
+
+    </div>
+    <div class="w3-bar w3-theme w3-xlarge w3-container" id="sidepaneDiv">
+        @* <a class="w3-bar-item w3-button navbar " ><i class="fa fa-bars" id="sidebarButton"></i></a>*@
+
+        <span class="w3-bar-item"></span>
+
+    </div>
+
+    <div class="container body-content w3-container">
+        @RenderBody()
+        <hr />
+        <footer class="w3-container navbar-fixed-bottom bottom-right fixedHeader-floating">
+            <p class="bottom-right">&copy; Asian Technologies Ltd. -@DateTime.Now.Year</p>
+            @* <iframe style="margin: 200px" src="http://free.timeanddate.com/clock/i5kx5d7o/n73/szw110/szh110/hbw0/hfc000/cf100/hgr0/fav0/fiv0/mqcfff/mql15/mqw4/mqd94/mhcfff/mhs4/mhl15/mhw4/mhd94/mmv0/hhcbbb/hmcddd/hsceee" frameborder="0" width="110" height="110"></iframe>*@
+            <div id="clock"></div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @*<script src="~/Scripts/jquery-3.1.1.min.js"></script>*@
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+
+    <script src="~/Scripts/navigation.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#errorModal").hide(5000);
+            $("#mySidebar").hide();
+            $("#sidebarButton").click(function () {
+                $("#mySidebar").toggle();
+            });
+        });
+
+    </script>
+    @*<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+    <script src="~/Scripts/login-form-validation.js"></script>
+    <script src="~/Scripts/summernote/summernote.min.js"></script>
+
+    <script>
+        //closeSidebar();
+        function openSidebar() {
+            document.getElementById("mySidebar").style.display = "block";
+        }
+
+        function closeSidebar() {
+            document.getElementById("mySidebar").style.display = "none";
+        }
+    </script>
+
+
+</body>
+</html>

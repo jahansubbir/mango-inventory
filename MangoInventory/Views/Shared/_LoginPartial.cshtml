@@ -1,0 +1,146 @@
+﻿@using MangoInventory.BLL
+@using MangoInventory.Models
+@{
+    EmployeeManager employeeManager = new EmployeeManager();
+    Employee employee = null;
+    int loggedIn = 0;
+    int eId = 0;
+    int adminId = 0;
+    HttpContext context = System.Web.HttpContext.Current;
+    HttpCookie cookie = context.Request.Cookies["loginCookie"];
+    if (cookie != null)
+    {
+        try
+        {
+            loggedIn = Convert.ToInt32(cookie["loginStatus"]);
+            eId = Convert.ToInt32(cookie["eId"]);
+            if (cookie["adminId"] != null)
+            {
+                adminId = Convert.ToInt32(cookie["adminId"]);
+            }
+            employee = employeeManager.GetEmployees().Find(a => a.Id == eId);
+        }
+        catch (Exception e)
+        {
+
+            TempData["message"] = e.StackTrace;
+
+        }
+
+    }
+
+
+}
+@if (loggedIn != 0)
+{
+    try
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li style="color: whitesmoke">
+                Hello @employee.Name! Welcome
+            </li>
+            <li>@Html.ActionLink("Logout", "Logout", new { Controller = "Home", id = eId })</li>
+
+        </ul>
+    }
+    catch (Exception e)
+    {
+
+        TempData["message"] = e.Message;
+        //throw;
+    }
+
+}
+else
+{
+    <b class="w3-button w3-blue-gray w3-medium nav navbar-nav navbar-right">@Html.ActionLink("Register", "Register", "Employee")</b>
+
+    <b class="w3-medium nav navbar-nav navbar-right">|</b>
+    <button onclick="document.getElementById('loginModal').style.display = 'block'"
+            class="w3-button w3-blue-gray w3-animate-opacity w3-card-2 w3-medium nav navbar-nav navbar-right">
+        &nbsp;<b>Login</b>
+    </button>
+    <b class="w3-medium nav navbar-nav navbar-right">|</b>
+    //if ()
+    // {
+
+    // }
+
+
+    if (TempData["message"] != null)
+    {
+        <div id="errorModal" class="w3-modal w3-mobile center-block w3-animate-zoom w3-animate-fading w3-center alert-danger " style="display: block; max-width: 600px; margin: 0 auto; height: 400px; margin-left: 400px; margin-top: 150px">
+            <div class="w3-modal-content w3-card-4 w3-animate-zoom w3-animate-fading w3-center alert-danger" style="max-width: 400px; height: 300px; padding-top: 30px">
+
+                <b> @*<h6 class="alert-danger">*@ @TempData["message"]!@*</h6>*@</b>
+
+            </div>
+
+        </div>
+    }
+    <div id="loginModal" class="w3-modal w3-mobile w3-center">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom w3-center" style="width:800px; margin:0 auto;max-width: 400px; z-index: 5; align-self: center">
+            <div class="w3-center">
+                <br />
+                <span onclick="document.getElementById('loginModal').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">x</span>
+                @*<img src="~/Content/themes/base/images/blank-avatar.png"
+                    class="w3-circle w3-margin-top" style="width: 30%"/>*@
+                <img src="~/Content/themes/base/images/ATL.png" class=" w3-margin-top" style="width: 20%; height: 10%" />
+
+
+                @using (Html.BeginForm("Login", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal w3-container", role = "form", @id = "loginForm" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        <hr />
+                        @Html.ValidationSummary(true)
+
+                        <div class="form-group">
+                            @Html.Label("UserId", new { @class = "w3-section" })@*<br/>*@
+                            <div>
+                                @Html.Editor("UserId", new { @class = "w3-input w3-border w3-margin-bottom ", @required = "required" })
+                                @*<input id="UserId" name="UserId" class="w3-input w3-border w3-margin-bottom " required="required" />*@
+                                <br /> @Html.ValidationMessage("UserId")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Password", new { @class = "w3-section" })@*<br />*@
+                            <div>
+                                @Html.Password("Password", new { @class = "w3-input w3-border w3-margin-bottom " })
+                                <br /> @Html.ValidationMessage("Password")
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="w3-section center-block">
+                                <input type="submit" value="Login" class="center-block w3-button w3-block w3-green w3-section w3-padding" id="submit" />
+                            </div>
+                        </div>
+                    </div>
+                }
+                @*<div class="w3-container w3-border-top w3-padding-16 w3-light-gray">
+                        <button onclick="document.getElementById('loginModal').style.display = 'none'"
+                                type="button" class="w3-button w3-red">cancel</button>
+                        <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
+
+                    </div>*@
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <ul class="nav navbar-nav navbar-right">
+        @* <li>@Html.ActionLink("sign up", "Register", "Employee", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+        @*<li>@Html.ActionLink("sign in", "Login", "Login", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+
+    </ul>
+}
+
+@section scripts{
+
+}

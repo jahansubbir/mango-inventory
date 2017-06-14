@@ -1,0 +1,198 @@
+﻿@model MangoInventory.Models.Quotation
+
+@{
+    ViewBag.Title = "Quote";
+}
+<br />
+<br />
+<br />
+
+<h2>@ViewBag.Message</h2>
+
+
+@using (Html.BeginForm(null, null, new { @id = "quotationForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @*<h4>Quotation</h4>
+            <hr />*@
+        @Html.ValidationSummary(true)
+        <div>
+            <div class="w3-card-2" style="width: 240px; padding: 10px; float: left;">
+
+                <div class="col-md-10">
+                    <label>To</label>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.ContactPerson, new {@class = "control-label col-md-2"})*@
+                        <div class="col-md-10" style="padding-left: 20px; margin-left: 20px">
+                            @Html.TextBoxFor(model => model.ContactPerson, new { @placeholder = "Contact Person" })
+                            @Html.ValidationMessageFor(model => model.ContactPerson)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.CompanyName, new {@class = "control-label col-md-2"})*@
+                        <div class="col-md-10" style="padding-left: 20px; margin-left: 20px">
+                            @Html.TextBoxFor(model => model.CompanyName, new { @placeholder = "Company Name" })
+                            @Html.ValidationMessageFor(model => model.CompanyName)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.Address, new {@class = "control-label col-md-2"})*@
+                        <div class="col-md-10" style="padding-left: 20px; margin-left: 20px">
+                            @Html.TextBoxFor(model => model.Address, new { @placeholder = "Address" })
+                            @Html.ValidationMessageFor(model => model.Address)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.Date, new {@class = "control-label col-md-2"})*@
+                        <div class="col-md-10" style="padding-left: 20px; margin-left: 20px">
+                            @Html.TextBoxFor(model => model.Date, new { @placeholder = "Date" })
+                            @Html.ValidationMessageFor(model => model.Date)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="suggestionDiv" style="margin-left: 260px;width: 665px; height: 235px; position: absolute;" class="w3-card-4 ui-corner-top top-right">
+                <table id="suggetionTable">
+                    <tbody id="suggestionBody"></tbody>
+                </table>
+            </div>
+            <br />
+            <div class="w3-card-4" style="z-index: 5; margin-top: 240px;">
+                <table class="table" id="productTable">
+                    <thead id="inputHead">
+                        <tr>
+                            <td>Product</td>
+                            <td>Model</td>
+                            <td>Quantity</td>
+                            <td>Unit Price</td>
+                            <td>Total Price</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                    <tfoot>
+
+                        @*<tr>
+                                <td>@Html.EditorFor(model => model.CompanyName)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.EditorFor(model => model.Address)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.EditorFor(model => model.Date)</td>
+                            </tr>*@
+                        <tr>
+                            <td><label>Category</label></td>
+                            <td><label>Sub-category</label></td>
+                            <td><label>Type</label></td>
+                            <td><label>Product</label></td>
+                            <td><label>Quantity</label></td>
+                            <td><label>Unit Price</label></td>
+                        </tr>
+                        <tr>
+                            <td>@Html.DropDownList("CategoryId","Select")</td>
+                            @*<td>@Html.EditorFor(model => model.SubCategoryId)</td>*@
+                            <td><select id="SubCategoryId" name="SubCategoryId"></select></td>
+                            <td><select id="TypeId" name="TypeId"></select></td>
+                            <td><select id="ProductId" name="ProductId"></select></td>
+                            @*<td></td>
+
+                                <td>@Html.DropDownListFor(model => model.ProductId, ViewBag.Products as SelectList, "Select")</td>
+                            *@
+                            <td>@Html.EditorFor(model => model.Quantity)</td>
+                            <td>@Html.EditorFor(model => model.UnitPrice)</td>
+                            <td></td>
+                            @*<td><input type="checkbox" name="Status" value="0"/></td>*@
+                            <td><input type="button" value="Add" id="AddButton" class="btn btn-default" /></td>
+                            <td></td>
+
+                        </tr>
+                    </tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+
+                    </tr>
+                </table>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @* <input type="submit" value="Add" class="btn btn-default" />*@
+                        <button id="submit" value=1 name="Status" class="btn btn-default">Quote</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <link href="~/Content/bootstrap-iso.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <input type="hidden" id="subUrl" value="@Url.Action("GetSubCategoryByCategoryId", "SubCategory")" />
+    <input type="hidden" id="typeUrl" value="@Url.Action("GetTypesBySubCategoryId","Product")" />
+    <input type="hidden" id="productUrl" value="@Url.Action("GetProductByTypeId", "Product")" />
+    <input type="hidden" id="createUrl" value="@Url.Action("Create", "Quotation")" />
+    <input type="hidden" id="productDetailsUrl" value="@Url.Action("GetProductDetailsById","Product")" />
+}
+
+@*<div>
+        @Html.ActionLink("Report", "Report", new { quotationNo =ViewBag.QuotationId})
+    </div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/product-cascade.js"></script>
+    <script src="~/Scripts/product-dropdown.js"></script>
+    <script>
+        $(function () {
+            $("#Date").datepicker({
+                todayHighlight: true,
+                autoclose: true
+            });
+        });
+    </script>
+    @*<script>
+        $(document).ready(function () {
+            $("#quotationForm").validate({
+                rules: {
+                    ContactPerson: "required",
+                    CompanyName: "required"
+                },
+                message: {
+                    ContactPerson: "Whom you contacted?",
+                    CompanyName: "Company Name"
+                }
+            });
+
+        });
+    </script>*@
+    <script src="~/Scripts/product-details.js"></script>
+    <script src="~/Scripts/create-quotation.js"></script>
+    <script>
+        //$(document).ready(function () {
+        //var clicked = $("#submit").click;
+
+        //if (!clicked) {
+        window.onbeforeunload = function () {
+            //return window.alert("WOW!");
+            return 'Are you sure you want to navigate away from this page?';
+        };
+
+
+
+        //});
+
+    </script>
+
+
+
+}
