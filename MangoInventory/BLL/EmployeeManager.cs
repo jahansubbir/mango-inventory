@@ -32,9 +32,13 @@ namespace MangoInventory.BLL
             return null;
         }
 
+      
+
         public List<Employee> GetEmployees()
         {
             return employeeGateway.GetEmployees();
-        } 
+        }
+
+        
     }
 }

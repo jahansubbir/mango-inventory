@@ -174,12 +174,7 @@ namespace MangoInventory.Controllers
             db.Configuration.ProxyCreationEnabled=false;
             var products = db.Products.Where(a => a.TypeId == tId).ToList();
 
-            ////var obj = JsonConvert.SerializeObject(products, Formatting.Indented,
-            ////                  new JsonSerializerSettings()
-            ////                  {
-            ////                      ReferenceLoopHandling = ReferenceLoopHandling.Serialize
-            ////                  });
-            //var obj = new JavaScriptSerializer().Serialize(products);
+           
             
             return Json(products, JsonRequestBehavior.AllowGet);
         }
@@ -194,10 +189,11 @@ namespace MangoInventory.Controllers
         public JsonResult GetProductDetailsById(int pId)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            var prodcuts = productManager.GetProducts();
+            var prodcuts = productManager.GetProducts().Select(n=>new{Id=n.Id,Name=n.Name,Model=n.Model,Description=n.Description,Brand=n.Brand}).ToList();
             var product = prodcuts.Find(a => a.Id == pId);
-           var productList = JsonConvert.SerializeObject(product);
-            return Json(productList, JsonRequestBehavior.AllowGet);
+            //var p=product.
+           //var productList = JsonConvert.SerializeObject(product);
+            return Json(product, JsonRequestBehavior.AllowGet);
         }
     }
 }

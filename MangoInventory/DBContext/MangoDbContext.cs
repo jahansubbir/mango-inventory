@@ -12,7 +12,7 @@ namespace MangoInventory.DBContext
         public MangoDbContext()
             : base("mangoConnection")
         {
-
+            Database.SetInitializer<MangoDbContext>(new CreateDatabaseIfNotExists<MangoDbContext>());
         }
 
         public DbSet<Company> Companies { get; set; }
@@ -31,6 +31,7 @@ namespace MangoInventory.DBContext
         public DbSet<Unit> Units { get; set; }
         public DbSet<MrView> MrView { get; set; }
         public DbSet<StockView> StockView { get; set; }
+        public DbSet<QuotationView> QuotationView { get; set; }
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

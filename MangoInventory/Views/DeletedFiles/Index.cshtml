@@ -1,0 +1,159 @@
+﻿@using MangoInventory.Models
+@model IEnumerable<MangoInventory.Models.QuotationView>
+
+@{
+    ViewBag.Title = "Index";
+}
+@{
+    ViewBag.Title = "Index";
+    QuotationView quotation = ViewBag.Quotation;
+    decimal totalAmount = 0;
+
+}
+
+<h2 style="text-align: center">Asian Technologies Limited</h2>
+<h3 style="font-size: 12px; text-align: center">10, Mehedibag Road, Chatteswari Circle, Chittagong</h3>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<div class="w3-card-4" style="padding: 10px;">
+<div class="w3-card-2" style="max-width: 300px; padding: 10px; float: left">
+    <table>
+        <tr><td><label>TO,</label></td></tr>
+
+        <tr><td><label>@quotation.ContactPerson</label></td></tr>
+        <tr><td><label>@quotation.CompanyName</label></td></tr>
+        <tr><td><label>@quotation.Address</label></td></tr>
+
+    </table>
+</div>
+<div class="w3-card-2" style="margin-left: 400px; margin-top: 30px; max-width: 220px; float: right">
+    <table>
+        <tr>
+            <td><label>Date:</label></td>
+            <td><label>@quotation.Date.ToString("dd-MM-yy")</label></td>
+        </tr>
+        <tr>
+            <td><label>Quotation:</label></td>
+            <td><label>@quotation.QuotationId</label></td>
+        </tr>
+    </table>
+
+
+</div>
+<br/>
+
+
+    <div class="w3-card-4" style="margin-top: 200px" id="UpdateTable">
+        <table class="table">
+            <tr>
+                @*<th>
+                    @Html.DisplayName("")
+                </th>*@
+
+                <th style="text-align: center">
+                    @Html.DisplayName("Description")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitPrice)
+                </th>
+                <th style="text-align: right">
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Employee)
+                    </th>*@
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                //contact = item.ContactPerson;
+
+                <tr>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.ContactPerson)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompanyName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuotationId)
+                        </td>*@
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Product)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Model)
+                        </td>*@
+                    <td>
+                        <b>@Html.DisplayFor(modelItem => item.Product)</b><br/>
+                        @Html.DisplayFor(modelItem => item.Model)<br/>
+                        @Html.DisplayFor(modelItem => item.Brand)<br/>
+                        <b>Key features:</b><br/>
+                        @Html.Raw(item.Description)
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td style="text-align: right">
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    @*Edit Begins*@
+                    <td><input type="submit" id="@item.Id" name="@item.Id" value="Edit" class="btn-info"/></td>
+
+
+                    @*Edit Ends*@
+                </tr>
+                @*<tr>
+                        <td></td><td></td><td></td>
+                        <td><label>Total Price</label></td>
+                        <td>@Model.Sum(a => a.Total)</td>
+                    </tr>*@
+                totalAmount = Model.Sum(a => a.Total);
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                @*<td></td>*@
+                <td><label>Total Price</label></td>
+                <td style="text-align: right">@totalAmount.ToString("N")</td>
+            </tr>
+        </table>
+    </div>
+    <table>
+        <tr><td><label>Best regards</label></td></tr>
+        <tr><td>@quotation.Employee</td></tr>
+        <tr><td>@quotation.Designation</td></tr>
+        <tr><td>@quotation.Department</td></tr>
+        <tr><td><label>Asian Technologies Ltd.</label></td></tr>
+    </table>
+    <div class="w3-card-2" style="max-width: 400px; margin: 0 auto">
+        <div style="margin-left: 100px">
+            @Html.ActionLink("Word", "Report", new {Controller = "Quotation", quotationId = @quotation.QuotationId, type = "Word"}, new {@class = "btn-info"})
+            |@Html.ActionLink("Excel", "Report", new {Controller = "Quotation", quotationId = @quotation.QuotationId, type = "Excel"}, new {@class = "btn-success"})
+            |@Html.ActionLink("PDF", "Report", new {Controller = "Quotation", quotationId = @quotation.QuotationId, type = "PDF"}, new {@class = "btn-success"})
+            |@Html.ActionLink("Edit", "Edit", new {Controller = "Quotation", id = @quotation.QuotationId}, new {@class = "btn-warning"})
+        </div>
+    </div>
+ 
+</div>
+@section scripts{
+    $(document).ready(function(){
+
+    })
+}

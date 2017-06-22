@@ -75,7 +75,7 @@ namespace MangoInventory.Controllers
             catch (Exception e)
             {
 
-                ViewBag.Message = e.Message;
+               TempData["message"] = e.Message;
                 return RedirectToAction("Index");
             }
         }

@@ -1,0 +1,153 @@
+﻿@using System.Web.SessionState
+@using MangoInventory.Models
+@model IEnumerable<MangoInventory.Models.QuotationView>
+
+@{
+    HttpContext context = System.Web.HttpContext.Current;
+     Session["Quotati"] = context.Session["Quotation"];
+    
+    
+    Layout = null;
+    QuotationView quotation = (QuotationView) ViewBag.Quotation;
+    decimal totalAmount = 0;
+    List<QuotationView> Mod = ViewBag.Model;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PrintQuotation</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <div class="container"  style="margin: 0 auto; max-width: 2480px; max-height: 3508px; margin-top: 10px">
+        <img src="~/Images/web_logo.png" width="100" style="padding: 10px;"/><br/>
+        <div style="padding: 10px; margin-top: 20px">
+            <div  style="max-width: 240px; padding: 10px; float: left">
+                <table>
+                    <tr><td><label>TO,</label></td></tr>
+
+                    <tr><td><label>@quotation.ContactPerson</label></td></tr>
+                    <tr><td><label>@quotation.CompanyName</label></td></tr>
+                    <tr><td><label>@quotation.Address</label></td></tr>
+
+                </table>
+            </div>
+            <div  style="margin-left: 250px; max-width: 250px; float: right">
+                <table>
+                    <tr>
+                        <td><label>Date:</label></td>
+                        <td><label>@quotation.Date.ToString("dd-MM-yy")</label></td>
+                    </tr>
+                    <tr>
+                        <td><label>Quotation:</label></td>
+                        <td><label>@quotation.QuotationId</label></td>
+                    </tr>
+                </table>
+
+
+            </div>
+            <br/>
+            <div  style="margin-top: 200px; padding: 10px">
+                <table class="table table-bordered">
+                    <tr>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.ContactPerson)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompanyName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Date)
+                        </th>*@
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.QuotationId)
+                        </th>*@
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.Product)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Model)
+                        </th>*@
+                        <th>
+                            @Html.DisplayName("Description")
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Quantity)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UnitPrice)
+                        </th>
+                        <th style="text-align: right">
+                            @Html.DisplayNameFor(model => model.Total)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.Employee)
+                        </th>*@
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Mod)
+                    {
+                        //contact = item.ContactPerson;
+
+                        <tr>
+
+                            <td>
+                                <b>@Html.DisplayFor(modelItem => item.Product)</b><br/>
+                                @Html.DisplayFor(modelItem => item.Model)<br/>
+                                @Html.DisplayFor(modelItem => item.Brand)<br/>
+                                <b>Key features:</b><br/>
+                                @Html.Raw(item.Description)
+
+                            </td>
+                            <td style="position: relative; vertical-align: middle">
+
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                            <td style="position: relative; vertical-align: middle">
+                                @Html.DisplayFor(modelItem => item.UnitPrice)
+                            </td>
+                            <td style="text-align: right; vertical-align: middle">
+                                @Html.DisplayFor(modelItem => item.Total)
+                            </td>
+                            @*<td>
+                @Html.DisplayFor(modelItem => item.Employee)
+            </td>*@
+                            @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+                            @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+                            @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>*@
+                        </tr>
+                                    @*<tr>
+                            <td></td><td></td><td></td>
+                            <td><label>Total Price</label></td>
+                            <td>@Model.Sum(a => a.Total)</td>
+                        </tr>*@
+                        totalAmount = Mod.Sum(a => a.Total);
+                    }
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        @*<td></td>*@
+                        <td><label>Total Price</label></td>
+                        <td style="text-align: right">@totalAmount.ToString("N")</td>
+                    </tr>
+                </table>
+            </div>
+            @* @Html.ActionLink("Report", "Report", new { Controller = "Quotation", quotationNo = @ViewBag.QuotationNo })*@
+        </div>
+    </div>
+    @*@RenderBody()*@
+</body>
+</html>

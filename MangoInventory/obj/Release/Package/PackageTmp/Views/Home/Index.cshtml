@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "mango-home";
+}
+
+
+<div class="w3-container w3-margin-top w3-card-2">
+
+    <img src="~/Content/themes/base/images/inventoryback.png" class="center w3-margin-left w3-padding" width="960" style="width: 960px; height: auto;z-index: -1" />
+    @if (TempData["message"] != null)
+    {
+
+        <div class="w3-modal-content w3-card w3-animate-top" style="max-width: 400px">
+
+            @TempData["message"]
+
+        </div>
+
+    }
+
+</div>

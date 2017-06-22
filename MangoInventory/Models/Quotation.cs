@@ -42,7 +42,7 @@ namespace MangoInventory.Models
 
         public int ProductId { get; set; }
         [Required(ErrorMessage = "Write Quantity")]
-        public Product Product { get; set; }
+       
         public decimal Quantity { get; set; }
         [Required(ErrorMessage = "Unit Price")]
         public decimal UnitPrice { get; set; }
@@ -53,6 +53,7 @@ namespace MangoInventory.Models
         public string QuotationId { get; set; }
 
         public int Status { get; set; }
+        public Product Product { get; set; }
 
 
 

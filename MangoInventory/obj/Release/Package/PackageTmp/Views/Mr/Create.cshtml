@@ -1,0 +1,232 @@
+﻿@using System.Web.UI.WebControls
+@model MangoInventory.Models.MR
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<br><br>
+<div class="alert-danger">@ViewBag.Message</div>
+
+<h2>Create</h2>
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>MR</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+         <div class="w3-card-4 w3-animate-zoom" style="margin-left: 1px; width: 1160px; max-width: 1380px; padding: 5px">
+            <table class="table w3-table">
+                <thead>
+                <tr>
+                    <td>@Html.TextBoxFor(model => model.ReceiveDate,new{@placeholder="Date"})</td>
+                </tr>
+                <tr>
+                    <td>@Html.TextBoxFor(model => model.Supplier,new{@placeholder="Supplier"})</td>
+                </tr>
+                    @*<th>@Html.LabelFor(model => model.ReceiveDate, new {@class = "control-label col-md-2"})</th>
+                    <th>@Html.LabelFor(model => model.Supplier, new {@class = "control-label col-md-2"})</th>*@
+                @*</tr>*@
+                    <tr>
+                    <th>@Html.Label("Product", new {@class = "control-label col-md-2"})</th>
+                    <th>@Html.LabelFor(model => model.ProductId, "Model", new { @class = "control-label col-md-2" })</th>
+                    <th>@Html.LabelFor(model => model.Quantity, new {@class = "control-label col-md-2"})</th>
+                    <th>@Html.LabelFor(model => model.UnitPrice, new {@class = "control-label col-md-2"})</th>
+
+                </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+                <tfoot>
+                <tr>
+                    @*<td>@Html.EditorFor(model => model.ReceiveDate)</td>
+                    <td>@Html.EditorFor(model => model.Supplier)</td></tr>*@
+                    <tr>
+                        <td>@Html.DropDownList("ProductName",ViewBag.ProductName as SelectList,"Select")</td>
+                        <td>@Html.DropDownListFor(model => model.ProductId, ViewBag.ProductId as SelectList, "Select")</td>
+                        <td>@Html.EditorFor(model => model.Quantity)</td>
+                        <td>@Html.EditorFor(model => model.UnitPrice)</td>
+                        <td>
+                            <input type="button" id="AddButton" name="AddButton" class="btn btn-default" value="Add" />
+                        </td>
+                    </tr>
+                </tfoot>
+               
+            </table>
+            <div class="form-group">
+
+                <div class="col-md-14">
+                    <table class="right">
+                        <tr>
+                            <td></td><td></td>
+                            <td><label class="col-md-1">Complete</label></td>
+                            <td><input type="checkbox" id="completeCheckbox" class="checkbox w3-check"/></td>
+                            <td><button id="Receive" name="Status" value="1" class="btn btn-default">Receive</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="productUrl" name="productUrl" value="@Url.Action("GetProductByProductName","Product")"/>
+        <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+    </div>
+}
+
+<div>
+    <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#Receive").hide();
+        $("#completeCheckbox").change(function () {
+            if (this.checked) {
+                $("#ReceiveDate").hide();
+                $("#Supplier").hide();
+                $("#ProductId").hide();
+                $("#ProductName").hide();
+                $("#Quantity").hide();
+                $("#UnitPrice").hide();
+                $("#Receive").show();
+                //$("#ReceiveDate").hide();
+            } else {
+                $("#Receive").hide();
+                $("#ReceiveDate").show();
+                $("#Supplier").show();
+                $("#ProductName").show();
+                $("#ProductId").show();
+                $("#Quantity").show();
+                $("#UnitPrice").show();
+
+            }
+        });
+    })
+</script>
+
+<script>
+    $('#ReceiveDate').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        endDate: "Today"
+    });
+</script>
+<script>
+    //$(document).ready(function () {
+    //var clicked = $("#submit").click;
+
+    //if (!clicked) {
+    window.onbeforeunload = function () {
+        //return window.alert("WOW!");
+        return 'Are you sure you want to navigate away from this page?';
+    };
+
+
+
+    //});
+
+</script>
+<script src="~/Scripts/product-model-name.js"></script>
+
+    @*<script src="~/Scripts/product-details.js"></script>
+    <script>
+      
+    </script>*@
+    <script>
+        $(document).ready(function() {
+            $("#ProductId").val('');
+            $("#Quantity").val('');
+            $("#UnitPrice").val('');
+            $("#mrTr").hide();
+            //$('#AddButton').click(function() {
+            //    if (!$.trim($('#ProductId').val())) {
+            //        alert("textbox value can't be empty");
+            //    }
+            //});
+            $("#AddButton").click(function() {
+                if (!$.trim($('#ReceiveDate').val())) {
+                    alert("Pick Date");
+                }
+                if (!$.trim($('#Supplier').val())) {
+                    alert("Give Supplier Name");
+                }
+                if (!$.trim($('#ProductId').val())) {
+                    alert("Select Product");
+                }
+
+
+                if (!$.trim($('#Quantity').val())) {
+                    alert("Write Quantity");
+                }
+                if (!$.trim($('#UnitPrice').val())) {
+                    alert("Unit price cannot be null");
+                } else {
+                    $("#tableBody").empty();
+                    var rcvDate = $("#ReceiveDate").val();
+                    var supplier = $("#Supplier").val();
+                    var productId = $("#ProductId").val();
+                    var quantity = $("#Quantity").val();
+                    var unitPrice = $("#UnitPrice").val();
+                    $("#ProductId").val('');
+                    $("#Quantity").val('');
+                    $("#UnitPrice").val('');
+                    var json = {
+                        ReceiveDate: rcvDate,
+                        Supplier: supplier,
+                        ProductId: productId,
+                        Quantity: quantity,
+                        UnitPrice: unitPrice
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("Receive", "MR")',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(json),
+                        success: function(data) {
+
+                            $("#tableBody").show();
+                            $.each(data, function(key, value) {
+                                var rawDate = value.ReceiveDate;
+                                var epochDate = rawDate.substring(6, rawDate.length - 2);
+                                //alert(rawDate);
+                                // alert(epochDate);
+                                var myDate = new Date(epochDate * 1);
+
+                                $("#tableBody").append('<tr><td>' + myDate.toLocaleDateString() + '</td><td>' + value.Supplier + '</td><td>' + value.Model + '</td><td>' + value.Quantity + '</td><td>' + value.UnitPrice + '</td></tr>');
+
+                            });
+
+
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            
+        })
+    </script>
+
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#ReceiveDate").datepicker({
+                /* format: "dd-mm-yy",*/
+                autoclose: true,
+                endDate: "today",
+                orientation: "bottom right",
+                todayHighlight:true
+            });
+
+        });
+    </script>
+}

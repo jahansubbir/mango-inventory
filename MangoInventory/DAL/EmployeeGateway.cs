@@ -34,14 +34,14 @@ namespace MangoInventory.DAL
             return db.Employees.ToList();
         }
 
-        string HashPassword(string password)
+     public  static string HashPassword(string password)
         {
             MD5 md5 = MD5.Create();
             return GetMd5Hash(md5, password);
 
         }
 
-        static string GetMd5Hash(MD5 md5Hash, string input)
+      public  static string GetMd5Hash(MD5 md5Hash, string input)
         {
 
             // Convert the input string to a byte array and compute the hash.

@@ -14,9 +14,12 @@ namespace MangoInventory.DAL
         MangoDbContext db=new MangoDbContext();
 
         public Employee Login(Login login)
+
         {
+            var password=EmployeeGateway.HashPassword(login.Password);
             login.UserId = login.UserId.ToUpper();
-            var employee = db.Employees.ToList().Find(a => a.EmpId == login.UserId && a.PasswordHash==login.Password);
+            var employees = db.Employees.ToList();
+            var employee = employees.Find(a => a.EmpId.Equals(login.UserId) && a.PasswordHash == password);
             return employee;
         }
 
