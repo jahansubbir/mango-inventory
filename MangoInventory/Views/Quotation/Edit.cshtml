@@ -27,6 +27,22 @@
     }
 </div>*@
 
-<div>
+<div><link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
     @Html.Partial("_ViewQuotationPartial")
 </div>
+@section scripts{
+
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#Date").datepicker({
+                format: "dd-M-yy",
+                endDate: "Today",
+                todayHighlight: true,
+                autoclose: true,
+                maxViewMode: 2,
+                orientation:"bottom right"
+            });
+        })
+    </script>
+}

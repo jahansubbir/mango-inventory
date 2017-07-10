@@ -22,16 +22,36 @@ namespace MangoInventory.DAL
 
         public int Edit(Quotation quotation)
         {
-           // db.Entry(quotation).State = EntityState.Modified;
-           //return db.SaveChanges();
-            int rowEffected = db.Database.ExecuteSqlCommand("UPDATE Quotations SET Quantity={0},UnitPrice={1} WHERE Id={2}",
-                quotation.Quantity, quotation.UnitPrice, quotation.Id);
+            //db.Entry(quotation).State = EntityState.Modified;
+            //return db.SaveChanges();
+            int rowEffected = db.Database.ExecuteSqlCommand("UPDATE Quotations SET ContactPerson={0},CompanyName={1},Address={2},Date={3}, " +
+                                                            "Quantity={4},UnitPrice={5} WHERE Id={6}",
+               quotation.ContactPerson,quotation.CompanyName,quotation.Address,quotation.Date, quotation.Quantity, quotation.UnitPrice, quotation.Id);
             return rowEffected;
         }
 
         public List<Quotation> GetQuotations()
         {
             return db.Quotations.ToList();
+        }
+
+        public int OrderWork(WorkOrder work)
+        {
+            db.WorkOrders.Add(work);
+            int rowEffected = db.SaveChanges();
+            return rowEffected;
+        }
+
+        public List<WorkOrder> GetWorkOrder()
+        {
+           return db.WorkOrders.ToList();
+        }
+
+        public List<WorkOrderView> GetWorkOrderViews()
+        {
+            return db.WorkOrderView.ToList();
         } 
+
+        
     }
 }

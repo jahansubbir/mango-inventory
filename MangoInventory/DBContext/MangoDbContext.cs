@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,8 @@ namespace MangoInventory.DBContext
         public MangoDbContext()
             : base("mangoConnection")
         {
-            Database.SetInitializer<MangoDbContext>(new CreateDatabaseIfNotExists<MangoDbContext>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<MangoDbContext>());
+            Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
 
         public DbSet<Company> Companies { get; set; }
@@ -28,18 +30,33 @@ namespace MangoInventory.DBContext
         public DbSet<Quotation> Quotations { get; set; }
         public DbSet<Requisition> Requisitions { get; set; }
         public DbSet<Stock> Stocks { get; set; }
+        
         public DbSet<Unit> Units { get; set; }
         public DbSet<MrView> MrView { get; set; }
         public DbSet<StockView> StockView { get; set; }
         public DbSet<QuotationView> QuotationView { get; set; }
+        public DbSet<WorkOrder> WorkOrders { get; set; }
+        public DbSet<WorkOrderView> WorkOrderView { get; set; }
+
+
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+           
+
+            base.OnModelCreating(modelBuilder);
+        //    modelBuilder.Entity<WorkOrder>()
+        //         .Property(c => c.Id)
+        //.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+           
+            //the code upon this is added because id was not auto incrementing
             modelBuilder.Entity<Product>()
                 .HasRequired(m => m.Unit)
                 .WithMany(t => t.Products)
                 .HasForeignKey(m => m.UnitId)
                 .WillCascadeOnDelete(false);
+
+
 
             modelBuilder.Entity<Product>()
                 .HasRequired(m => m.Category)

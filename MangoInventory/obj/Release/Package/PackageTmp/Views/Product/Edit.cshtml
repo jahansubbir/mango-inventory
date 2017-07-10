@@ -7,7 +7,7 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryId, "CategoryId", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CategoryId", String.Empty)
+                @Html.DropDownList("CategoryId", "SELECT")
                 @Html.ValidationMessageFor(model => model.CategoryId)
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SubCategoryId, "SubCategoryId", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("SubCategoryId", String.Empty)
+                @Html.DropDownList("SubCategoryId", "SELECT")
                 @Html.ValidationMessageFor(model => model.SubCategoryId)
             </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TypeId, "TypeId", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("TypeId", String.Empty)
+                @Html.DropDownList("TypeId", "SELECT")
                 @Html.ValidationMessageFor(model => model.TypeId)
             </div>
         </div>
@@ -74,18 +74,27 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Description, new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description)
                 @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.File, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.File, new { type = "file" })
+                @Html.ValidationMessageFor(model => model.File)
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default"/>
             </div>
         </div>
+        <input type="hidden" id="catUrl" value="@Url.Action("GetSubCategoryByCategoryId", "SubCategory")" />
+        <input type="hidden" id="subCatUrl" value="@Url.Action("GetTypesBySubCategoryId","Product")" />
     </div>
 }
 
@@ -95,4 +104,34 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+   <script src="~/Scripts/cascadeddropdown.js"></script>
+<script src="~/Scripts/summernote/summernote.min.js"></script>
+  <script>
+    $(document).ready(function () {
+        $('.note-editable').css('font-family', 'Verdana');
+        $("#Description").summernote({
+
+            //fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Verdana'],
+            fontNamesIgnoreCheck: ['Verdana'],
+            toolbar: [
+//['style', ['style']],
+['fontsize', ['fontsize']],
+['font', ['bold', 'italic', 'underline', 'clear']],
+ ['fontname', ['fontname']
+ ],
+
+['color', ['color']],
+['para', ['ul', 'ol', 'paragraph']],
+['height', ['height']],
+//['insert', ['picture', 'hr']],
+// ['table', ['table']]
+            ],
+            fontName: 'Verdana',
+            height: 150,
+            width: 500,
+            focus: false
+        });
+    });
+</script>
+
 }

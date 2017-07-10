@@ -16,6 +16,7 @@
         <hr />
         @Html.ValidationSummary(true)
 
+        
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryId, "Category", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -49,12 +50,13 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Model, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Model, new {@class = "control-label col-md-2"})
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Model)
                 @Html.ValidationMessageFor(model => model.Model)
             </div>
         </div>
+       
 
         <div class="form-group">
             @Html.LabelFor(model => model.Brand, new { @class = "control-label col-md-2" })
@@ -65,20 +67,20 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UnitId, "UnitId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UnitId, "Unit", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("UnitId", String.Empty)
                 @Html.ValidationMessageFor(model => model.UnitId)
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description, new { @class = "note-editable" })
                 @Html.ValidationMessageFor(model => model.Description)
             </div>
         </div>
+       
         <div class="form-group">
             @Html.LabelFor(model => model.File, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -107,8 +109,30 @@
     <script src="~/Scripts/cascadeddropdown.js"></script>
 <script src="~/Scripts/summernote/summernote.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $("#Description").summernote();
+        $(document).ready(function () {
+            $('.note-editable').css('font-family', 'Verdana');
+            $("#Description").summernote({
+                
+                //fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Verdana'],
+                fontNamesIgnoreCheck: ['Verdana'],
+                toolbar: [
+    //['style', ['style']],
+    ['fontsize', ['fontsize']],
+    ['font', ['bold', 'italic', 'underline', 'clear']],
+     ['fontname', ['fontname']
+     ],
+    
+    ['color', ['color']],
+    ['para', ['ul', 'ol', 'paragraph']],
+    ['height', ['height']],
+    //['insert', ['picture', 'hr']],
+   // ['table', ['table']]
+                ],
+                fontName: 'Verdana',
+                height: 150,
+                width:500,
+                focus: false
+            });
         });
     </script>
 }

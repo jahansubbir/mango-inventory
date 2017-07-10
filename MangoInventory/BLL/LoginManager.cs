@@ -18,19 +18,20 @@ namespace MangoInventory.BLL
 
         public string IsUser(Login login)
         {
-            int status = loginGateway.Login(login).Status;
-            if (status == 1)
-            {
-                return "User";
-            }else if (status==2)
-            {
-                return "Admin";
-            }
-            else
-            {
-                return "invalid";
-            }
-            
+            string status = loginGateway.Login(login).Status;
+            //if (status == 1)
+            //{
+            //    return "User";
+            //}else if (status==2)
+            //{
+            //    return "Admin";
+            //}
+            //else
+            //{
+            //    return "invalid";
+            //}
+            return status;
+
         }
     }
 }

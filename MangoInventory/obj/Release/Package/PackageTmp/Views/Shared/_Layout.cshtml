@@ -133,7 +133,11 @@
                     <i class="fa fa-caret-down w3-animate-top"></i>
                 </a>
                 <div id="quoteDiv" class="w3-hide w3-animate-left">
+                    <ul>@Html.ActionLink("View Quotations", "Index", "Quotation")</ul>
                     <ul>@Html.ActionLink("New Quotation", "Create", "Quotation")</ul>
+                    <ul>@Html.ActionLink("Work Orders", "WorkOrders", "Quotation")</ul>
+
+
 
                 </div>
                 <a class="w3-bar-item w3-button w3-animate-bottom" onclick="myAccordion('requistionDiv')" href="javascript:void(0)">

@@ -8,6 +8,8 @@ namespace MangoInventory.Models
     {
         public int Id { get; set; }
         [Required]
+        public int WorkOrderId { get; set; }
+
         public string RequisitionId { get; set; }
         [Required]
         public int  EmployeeId { get; set; }
@@ -21,6 +23,8 @@ namespace MangoInventory.Models
         public string Quantity { get; set; }
         [Required]
         public DateTime Date { get; set; }
+
+        public Product Product { get; set; }
 
     }
 }

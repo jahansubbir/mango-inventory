@@ -1,74 +1,81 @@
-﻿@model MangoInventory.Models.MR
+﻿@using MangoInventory.Models
+@model IEnumerable<MangoInventory.Models.MrView>
 
 @{
     ViewBag.Title = "Details";
+    MrView mr = ViewBag.Mr;
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>MR</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Product.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ReceiveDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ReceiveDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MRNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MRNo)
-        </dd>
-
-        <dt>
+@*<h2>Details</h2>*@
+@*<div>@Html.Partial("_CompanyPartial")</div>*@
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+@*<table class="table">
+    <tr>
+        <th>
             @Html.DisplayNameFor(model => model.Supplier)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Supplier)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.UnitPrice)
-        </dt>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MRNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiveDate)
+        </th>
+        <th></th>
+    </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.UnitPrice)
-        </dd>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Supplier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MRNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceiveDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-    </dl>
+</table>*@
+<div class="w3-card-2">
+    <div style="float: left">
+        @Html.DisplayNameFor(model => model.Supplier)&nbsp; @Html.Display(@mr.Supplier)
+    </div>
+    <div style="float: right">
+        @Html.DisplayNameFor(model => model.ReceiveDate)&nbsp; @mr.ReceiveDate
+        <br/>
+        @Html.DisplayNameFor(model => model.MRNo)&nbsp;@mr.Supplier
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

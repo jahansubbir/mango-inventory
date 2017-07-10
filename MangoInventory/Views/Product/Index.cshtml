@@ -20,14 +20,15 @@
         <th>
             @Html.DisplayNameFor(model => model.Type.Name)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Unit.Name)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Brand)
@@ -52,14 +53,15 @@
         <td>
             @Html.DisplayFor(modelItem => item.Type.Name)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Unit.Name)
-        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unit.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Brand)
@@ -69,7 +71,8 @@
             @*@Html.DisplayFor(modelItem => item.Description)*@
         </td>
         <td>
-            <img src="@Url.Content("~/Images/"+@item.ImagePath)" alt="pic" width="60" />
+            <img src="@Url.Content("~/Images/"+@item.ImagePath)" alt="@item.ImagePath" width="60" />
+            @*<img src="@Url.Content("~/Images/"+@item.ImagePath)" alt="@item.ImagePath" width="60" />*@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

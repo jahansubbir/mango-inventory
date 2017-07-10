@@ -1,10 +1,15 @@
-﻿@{
-
+﻿@using MangoInventory.DBContext
+@using MangoInventory.Models
+@*@using Microsoft.Office.Interop.Word*@
+@using Styles = System.Web.Optimization.Styles
+@{
+    MangoDbContext db = new MangoDbContext();
+    Company company = db.Companies.FirstOrDefault();
     //var message;
     int loggedIn = 0;
     int eId = 0;
     int adminId = 0;
-    HttpContext context = System.Web.HttpContext.Current;
+    HttpContext context = global::System.Web.HttpContext.Current;
     HttpCookie cookie = context.Request.Cookies["loginCookie"];
     if (cookie != null)
     {
@@ -62,8 +67,8 @@
     </style>
 </head>
 <body>
-    <br />
-    <br />
+    @*<br />
+    <br />*@
     <div class="navbar navbar-inverse navbar-fixed-top">
 
         <div class="container">
@@ -92,10 +97,11 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav"></ul>
                 @Html.Partial("_LoginPartial")
+                @*@Html.Partial("_CompanyPartial")*@
             </div>
-
+           
         </div>
-
+       
         <div>
             <nav class="w3-sidebar w3-animate-left w3-bar-block w3-card w3-display-position" style="max-height: 580px; overflow-y: scroll" id="mySidebar">
                 <div class="w3-container w3-theme-d2">
@@ -133,7 +139,11 @@
                     <i class="fa fa-caret-down w3-animate-top"></i>
                 </a>
                 <div id="quoteDiv" class="w3-hide w3-animate-left">
+                    <ul>@Html.ActionLink("View Quotations", "Index", "Quotation")</ul>
                     <ul>@Html.ActionLink("New Quotation", "Create", "Quotation")</ul>
+                    <ul>@Html.ActionLink("Work Orders", "WorkOrders", "Quotation")</ul>
+
+
 
                 </div>
                 <a class="w3-bar-item w3-button w3-animate-bottom" onclick="myAccordion('requistionDiv')" href="javascript:void(0)">
@@ -150,6 +160,9 @@
         </div>
 
     </div>
+    <div style="margin-left: 10%;padding: 10px">
+            <img src="@Url.Content("~/Images/" + company.Image)" width="100" style="float: left" />
+        </div>
     <div class="w3-bar w3-theme w3-xlarge w3-container" id="sidepaneDiv">
         @* <a class="w3-bar-item w3-button navbar " ><i class="fa fa-bars" id="sidebarButton"></i></a>*@
 
@@ -161,6 +174,12 @@
         @RenderBody()
         <hr />
         <footer class="w3-container navbar-fixed-bottom bottom-right fixedHeader-floating">
+            <div class="w3-card-4 navbar-fixed-bottom">
+                <h3 style="text-align: center">
+                    @company.Name
+                </h3>
+                <p style="text-align: center"><label>Adress:</label>&nbsp;@company.Address &nbsp;&nbsp;<label>Contact No:</label>&nbsp; @company.ContactNo<br /><label>Email:</label>&nbsp;@company.Email &nbsp;&nbsp;<label>Web:</label>&nbsp;@company.Website</p>
+            </div>
             <p class="bottom-right">&copy; Asian Technologies Ltd. -@DateTime.Now.Year</p>
             @* <iframe style="margin: 200px" src="http://free.timeanddate.com/clock/i5kx5d7o/n73/szw110/szh110/hbw0/hfc000/cf100/hgr0/fav0/fiv0/mqcfff/mql15/mqw4/mqd94/mhcfff/mhs4/mhl15/mhw4/mhd94/mmv0/hhcbbb/hmcddd/hsceee" frameborder="0" width="110" height="110"></iframe>*@
             <div id="clock"></div>

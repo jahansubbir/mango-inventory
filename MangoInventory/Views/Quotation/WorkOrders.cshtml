@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MangoInventory.Models.WorkOrder>
+
+@{
+    ViewBag.Title = "WorkOrders";
+}
+
+<h2>Work Orders</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.QuotationId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkOrderNo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuotationId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkOrderNo)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.WorkOrderNo }) |*@
+            @Html.ActionLink("Details", "WorkOrder", new { id=item.QuotationId }) |
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.WorkOrderNo })*@
+        </td>
+    </tr>
+}
+
+</table>

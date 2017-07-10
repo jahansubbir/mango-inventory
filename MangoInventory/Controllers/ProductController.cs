@@ -19,6 +19,7 @@ namespace MangoInventory.Controllers
     {
         private MangoDbContext db = new MangoDbContext();
         ProductManager productManager=new ProductManager();
+        private string path;
 
         // GET: /Product/
         public ActionResult Index()
@@ -34,7 +35,9 @@ namespace MangoInventory.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            var products = db.Products.Include(a => a.Type).ToList();
+
+            Product product = products.Find(a => a.Id == id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -52,34 +55,43 @@ namespace MangoInventory.Controllers
             return View();
         }
 
+        public void UploadImage(Product product)
+        {
+           // string path = null;
+            if (product.File != null)
+            {
+
+                string pic = product.Model;/*fileName.ToString();*/ /*System.IO.Path.GetFileName(company.Photo.FileName);*/
+                string ext = System.IO.Path.GetExtension(product.File.FileName);
+                path = Server.MapPath("~/Images/" + pic + ext);
+
+                product.ImagePath = pic + ext;
+                //product.ImagePath = path;
+
+            }
+            if (product.Model == null)
+            {
+                product.Model = product.Name;
+            }
+        }
         // POST: /Product/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,CategoryId,SubCategoryId,TypeId,Name,Model,Brand,UnitId,Description,File,ImagePath")] Product product)
+        public ActionResult Create(/*[Bind(Include="Id,CategoryId,SubCategoryId,TypeId,Name,Model,Brand,UnitId,Description,File,ImagePath")]*/ Product product)
         {
-            string path = null;
-            if (product.File!=null)
-            {
-                
-                string pic = product.Model;/*fileName.ToString();*/ /*System.IO.Path.GetFileName(company.Photo.FileName);*/
-                string ext = System.IO.Path.GetExtension(product.File.FileName);
-                path = Server.MapPath("~/Images/" + pic + ext);
-                
-                product.ImagePath = pic + ext;
-                
-            }
-            if (product.Model==null)
-            {
-                product.Model = product.Name;
-            }
+            //string path = null;
+           UploadImage(product);
             if (ModelState.IsValid)
             {
+                
                string message= productManager.SaveProduct(product);
                 if (message == "Product has been Saved to Database" && product.File != null)
-                    if (path != null) product.File.SaveAs(path);
-
+                    if (path != null)
+                    product.File.SaveAs(path);
+                
                 return RedirectToAction("Index");
             }
 
@@ -113,13 +125,20 @@ namespace MangoInventory.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,CategoryId,SubCategoryId,TypeId,Name,Model,Brand,UnitId,Description")] Product product)
+        public ActionResult Edit([Bind(Include="Id,CategoryId,SubCategoryId,TypeId,Name,Model,Brand,UnitId,Description,File")] Product product)
         {
+            UploadImage(product);
             if (ModelState.IsValid)
             {
-                productManager.EditProduct(product);
+              var message=  productManager.EditProduct(product);
+              if (message == "Edited" && product.File != null)
+                    if (path != null)
+                        product.File.SaveAs(path);
+
                 return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
             ViewBag.SubCategoryId = new SelectList(db.SubCategories, "Id", "Name", product.SubCategoryId);

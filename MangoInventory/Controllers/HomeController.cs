@@ -52,10 +52,7 @@ namespace MangoInventory.Controllers
                    
                   cookie["loginStatus"] = 1.ToString();
                     cookie["eId"] = employee.Id.ToString();
-                    if (loginManager.IsUser(login) == "Admin")
-                    {
-                        cookie["adminId"] = cookie["eId"];
-                    }
+                    cookie["role"] = employee.Status;
                     cookie.Expires = DateTime.Now.AddDays(2);
 
                     Response.Cookies.Add(cookie);
@@ -93,6 +90,7 @@ namespace MangoInventory.Controllers
                 cookie["loginStatus"] = null;
                 cookie["eId"] = null;
                 cookie["adminId"] = null;
+                cookie["role"] = null;
                 cookie.Expires = DateTime.Now;
                 Response.Cookies.Add(cookie);
             }
@@ -111,6 +109,7 @@ namespace MangoInventory.Controllers
 
         //    return View();
         //}
+        
 
       
     }

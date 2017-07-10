@@ -54,6 +54,7 @@ namespace MangoInventory.Models
         public virtual Unit Unit { get; set; }
         public ICollection<MR> Mrs { get; set; }
         public ICollection<Quotation> Quotations { get; set; }
+        
 
         
        

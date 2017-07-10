@@ -85,5 +85,26 @@ namespace MangoInventory.BLL
             return model;
 
         }
+
+        public string OrderWork(WorkOrder work)
+        {
+            if (quotationGateway.GetWorkOrder().Find(a=>a.WorkOrderNo==work.WorkOrderNo)==null)
+            {
+                if (quotationGateway.OrderWork(work) > 0)
+                {
+                    return "Internal Work Order";
+                }
+                return "Failed";
+            }
+            return "Work Order No: " + work.WorkOrderNo + " has already been submitted";
+        }
+
+        public List<WorkOrderView> GeWorkOrderViews()
+        {
+            return quotationGateway.GetWorkOrderViews();
+        } 
+        
+
+      
     }
 }

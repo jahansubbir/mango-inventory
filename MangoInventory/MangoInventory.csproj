@@ -216,165 +216,73 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706080932123_MangoInventoryV19.cs" />
-    <Compile Include="Migrations\201706080932123_MangoInventoryV19.Designer.cs">
-      <DependentUpon>201706080932123_MangoInventoryV19.cs</DependentUpon>
+    <Compile Include="Migrations\201706230339114_MangoInventoryV60.cs" />
+    <Compile Include="Migrations\201706230339114_MangoInventoryV60.Designer.cs">
+      <DependentUpon>201706230339114_MangoInventoryV60.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706080958492_MangoInventoryV20.cs" />
-    <Compile Include="Migrations\201706080958492_MangoInventoryV20.Designer.cs">
-      <DependentUpon>201706080958492_MangoInventoryV20.cs</DependentUpon>
+    <Compile Include="Migrations\201707011027578_MangoInventoryV61.cs" />
+    <Compile Include="Migrations\201707011027578_MangoInventoryV61.Designer.cs">
+      <DependentUpon>201707011027578_MangoInventoryV61.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706081000013_MangoInventoryV21.cs" />
-    <Compile Include="Migrations\201706081000013_MangoInventoryV21.Designer.cs">
-      <DependentUpon>201706081000013_MangoInventoryV21.cs</DependentUpon>
+    <Compile Include="Migrations\201707011128424_MangoInventoryV62.cs" />
+    <Compile Include="Migrations\201707011128424_MangoInventoryV62.Designer.cs">
+      <DependentUpon>201707011128424_MangoInventoryV62.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706081000552_MangoInventoryV22.cs" />
-    <Compile Include="Migrations\201706081000552_MangoInventoryV22.Designer.cs">
-      <DependentUpon>201706081000552_MangoInventoryV22.cs</DependentUpon>
+    <Compile Include="Migrations\201707011208057_MangoInventoryV63.cs" />
+    <Compile Include="Migrations\201707011208057_MangoInventoryV63.Designer.cs">
+      <DependentUpon>201707011208057_MangoInventoryV63.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706100407298_MangoInventoryV23.cs" />
-    <Compile Include="Migrations\201706100407298_MangoInventoryV23.Designer.cs">
-      <DependentUpon>201706100407298_MangoInventoryV23.cs</DependentUpon>
+    <Compile Include="Migrations\201707011214158_MangoInventoryV64.cs" />
+    <Compile Include="Migrations\201707011214158_MangoInventoryV64.Designer.cs">
+      <DependentUpon>201707011214158_MangoInventoryV64.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706100511070_Initial.cs" />
-    <Compile Include="Migrations\201706100511070_Initial.Designer.cs">
-      <DependentUpon>201706100511070_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201707011219379_MangoInventoryV65.cs" />
+    <Compile Include="Migrations\201707011219379_MangoInventoryV65.Designer.cs">
+      <DependentUpon>201707011219379_MangoInventoryV65.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706100515211_Initial1.cs" />
-    <Compile Include="Migrations\201706100515211_Initial1.Designer.cs">
-      <DependentUpon>201706100515211_Initial1.cs</DependentUpon>
+    <Compile Include="Migrations\201707011221152_MangoInventoryV66.cs" />
+    <Compile Include="Migrations\201707011221152_MangoInventoryV66.Designer.cs">
+      <DependentUpon>201707011221152_MangoInventoryV66.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706100607482_MangoInventoryV24.cs" />
-    <Compile Include="Migrations\201706100607482_MangoInventoryV24.Designer.cs">
-      <DependentUpon>201706100607482_MangoInventoryV24.cs</DependentUpon>
+    <Compile Include="Migrations\201707020325325_MangoInventoryV67.cs" />
+    <Compile Include="Migrations\201707020325325_MangoInventoryV67.Designer.cs">
+      <DependentUpon>201707020325325_MangoInventoryV67.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706100900168_MangoInventoryV25.cs" />
-    <Compile Include="Migrations\201706100900168_MangoInventoryV25.Designer.cs">
-      <DependentUpon>201706100900168_MangoInventoryV25.cs</DependentUpon>
+    <Compile Include="Migrations\201707020331347_MangoInventoryV68.cs" />
+    <Compile Include="Migrations\201707020331347_MangoInventoryV68.Designer.cs">
+      <DependentUpon>201707020331347_MangoInventoryV68.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706100938303_MangoInventoryV26.cs" />
-    <Compile Include="Migrations\201706100938303_MangoInventoryV26.Designer.cs">
-      <DependentUpon>201706100938303_MangoInventoryV26.cs</DependentUpon>
+    <Compile Include="Migrations\201707020336384_MangoInventoryV69.cs" />
+    <Compile Include="Migrations\201707020336384_MangoInventoryV69.Designer.cs">
+      <DependentUpon>201707020336384_MangoInventoryV69.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706101022346_MangoInventoryV27.cs" />
-    <Compile Include="Migrations\201706101022346_MangoInventoryV27.Designer.cs">
-      <DependentUpon>201706101022346_MangoInventoryV27.cs</DependentUpon>
+    <Compile Include="Migrations\201707020338348_MangoInventoryV70.cs" />
+    <Compile Include="Migrations\201707020338348_MangoInventoryV70.Designer.cs">
+      <DependentUpon>201707020338348_MangoInventoryV70.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706101034117_MangoInventoryV28.cs" />
-    <Compile Include="Migrations\201706101034117_MangoInventoryV28.Designer.cs">
-      <DependentUpon>201706101034117_MangoInventoryV28.cs</DependentUpon>
+    <Compile Include="Migrations\201707020356066_MangoInventoryV71.cs" />
+    <Compile Include="Migrations\201707020356066_MangoInventoryV71.Designer.cs">
+      <DependentUpon>201707020356066_MangoInventoryV71.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706110352385_MangoInventoryV29.cs" />
-    <Compile Include="Migrations\201706110352385_MangoInventoryV29.Designer.cs">
-      <DependentUpon>201706110352385_MangoInventoryV29.cs</DependentUpon>
+    <Compile Include="Migrations\201707020413111_MangoInventoryV72.cs" />
+    <Compile Include="Migrations\201707020413111_MangoInventoryV72.Designer.cs">
+      <DependentUpon>201707020413111_MangoInventoryV72.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706110755462_MangoInventoryV30.cs" />
-    <Compile Include="Migrations\201706110755462_MangoInventoryV30.Designer.cs">
-      <DependentUpon>201706110755462_MangoInventoryV30.cs</DependentUpon>
+    <Compile Include="Migrations\201707020415412_MangoInventoryV73.cs" />
+    <Compile Include="Migrations\201707020415412_MangoInventoryV73.Designer.cs">
+      <DependentUpon>201707020415412_MangoInventoryV73.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706110834166_MangoInventoryV31.cs" />
-    <Compile Include="Migrations\201706110834166_MangoInventoryV31.Designer.cs">
-      <DependentUpon>201706110834166_MangoInventoryV31.cs</DependentUpon>
+    <Compile Include="Migrations\201707020417036_MangoInventoryV74.cs" />
+    <Compile Include="Migrations\201707020417036_MangoInventoryV74.Designer.cs">
+      <DependentUpon>201707020417036_MangoInventoryV74.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706110835551_MangoInventoryV32.cs" />
-    <Compile Include="Migrations\201706110835551_MangoInventoryV32.Designer.cs">
-      <DependentUpon>201706110835551_MangoInventoryV32.cs</DependentUpon>
+    <Compile Include="Migrations\201707020419057_MangoInventoryV75.cs" />
+    <Compile Include="Migrations\201707020419057_MangoInventoryV75.Designer.cs">
+      <DependentUpon>201707020419057_MangoInventoryV75.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706110836418_MangoInventoryV33.cs" />
-    <Compile Include="Migrations\201706110836418_MangoInventoryV33.Designer.cs">
-      <DependentUpon>201706110836418_MangoInventoryV33.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706110840484_MangoInventoryV34.cs" />
-    <Compile Include="Migrations\201706110840484_MangoInventoryV34.Designer.cs">
-      <DependentUpon>201706110840484_MangoInventoryV34.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706110855316_MangoInventoryV35.cs" />
-    <Compile Include="Migrations\201706110855316_MangoInventoryV35.Designer.cs">
-      <DependentUpon>201706110855316_MangoInventoryV35.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706111638198_MangoInventoryV36.cs" />
-    <Compile Include="Migrations\201706111638198_MangoInventoryV36.Designer.cs">
-      <DependentUpon>201706111638198_MangoInventoryV36.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706120626124_MangoInventoryV37.cs" />
-    <Compile Include="Migrations\201706120626124_MangoInventoryV37.Designer.cs">
-      <DependentUpon>201706120626124_MangoInventoryV37.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706120932333_MangoInventoryV38.cs" />
-    <Compile Include="Migrations\201706120932333_MangoInventoryV38.Designer.cs">
-      <DependentUpon>201706120932333_MangoInventoryV38.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706140417110_MangoInventoryV39.cs" />
-    <Compile Include="Migrations\201706140417110_MangoInventoryV39.Designer.cs">
-      <DependentUpon>201706140417110_MangoInventoryV39.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706140926557_MangoInventoryV44.cs" />
-    <Compile Include="Migrations\201706140926557_MangoInventoryV44.Designer.cs">
-      <DependentUpon>201706140926557_MangoInventoryV44.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706140933071_MangoInventoryV45.cs" />
-    <Compile Include="Migrations\201706140933071_MangoInventoryV45.Designer.cs">
-      <DependentUpon>201706140933071_MangoInventoryV45.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706140933578_MangoInventoryV46.cs" />
-    <Compile Include="Migrations\201706140933578_MangoInventoryV46.Designer.cs">
-      <DependentUpon>201706140933578_MangoInventoryV46.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706140941061_MangoInventoryV47.cs" />
-    <Compile Include="Migrations\201706140941061_MangoInventoryV47.Designer.cs">
-      <DependentUpon>201706140941061_MangoInventoryV47.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706140957174_MangoInventoryV48.cs" />
-    <Compile Include="Migrations\201706140957174_MangoInventoryV48.Designer.cs">
-      <DependentUpon>201706140957174_MangoInventoryV48.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706141002281_MangoInventoryV49.cs" />
-    <Compile Include="Migrations\201706141002281_MangoInventoryV49.Designer.cs">
-      <DependentUpon>201706141002281_MangoInventoryV49.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706141015084_MangoInventoryV50.cs" />
-    <Compile Include="Migrations\201706141015084_MangoInventoryV50.Designer.cs">
-      <DependentUpon>201706141015084_MangoInventoryV50.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706170557293_MangoInventoryV51.cs" />
-    <Compile Include="Migrations\201706170557293_MangoInventoryV51.Designer.cs">
-      <DependentUpon>201706170557293_MangoInventoryV51.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706171021393_MangoInventoryV52.cs" />
-    <Compile Include="Migrations\201706171021393_MangoInventoryV52.Designer.cs">
-      <DependentUpon>201706171021393_MangoInventoryV52.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706171026042_MangoInventoryV53.cs" />
-    <Compile Include="Migrations\201706171026042_MangoInventoryV53.Designer.cs">
-      <DependentUpon>201706171026042_MangoInventoryV53.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706180410132_MangoInventoryV54.cs" />
-    <Compile Include="Migrations\201706180410132_MangoInventoryV54.Designer.cs">
-      <DependentUpon>201706180410132_MangoInventoryV54.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706180412441_MangoInventoryV55.cs" />
-    <Compile Include="Migrations\201706180412441_MangoInventoryV55.Designer.cs">
-      <DependentUpon>201706180412441_MangoInventoryV55.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706180414254_MangoInventoryV56.cs" />
-    <Compile Include="Migrations\201706180414254_MangoInventoryV56.Designer.cs">
-      <DependentUpon>201706180414254_MangoInventoryV56.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706180440294_MangoInventoryV5.cs" />
-    <Compile Include="Migrations\201706180440294_MangoInventoryV5.Designer.cs">
-      <DependentUpon>201706180440294_MangoInventoryV5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706190641231_MangoInventoryV57.cs" />
-    <Compile Include="Migrations\201706190641231_MangoInventoryV57.Designer.cs">
-      <DependentUpon>201706190641231_MangoInventoryV57.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706191020137_MangoInventoryV58.cs" />
-    <Compile Include="Migrations\201706191020137_MangoInventoryV58.Designer.cs">
-      <DependentUpon>201706191020137_MangoInventoryV58.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706200134381_MangoInventoryV59.cs" />
-    <Compile Include="Migrations\201706200134381_MangoInventoryV59.Designer.cs">
-      <DependentUpon>201706200134381_MangoInventoryV59.cs</DependentUpon>
+    <Compile Include="Migrations\201707020514455_MangoInventoryV76.cs" />
+    <Compile Include="Migrations\201707020514455_MangoInventoryV76.Designer.cs">
+      <DependentUpon>201707020514455_MangoInventoryV76.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -399,7 +307,14 @@
     <Compile Include="Models\Unit.cs" />
     <Compile Include="Models\WordDocumentAttribute.cs" />
     <Compile Include="Models\WorkOrder.cs" />
+    <Compile Include="Models\WorkOrderView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\ReportWorkOrder.cs">
+      <DependentUpon>ReportWorkOrder.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Report\ReportQuotation.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -777,6 +692,8 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="App_Browsers\qt.browser" />
     <None Include="Properties\PublishProfiles\Mango.pubxml" />
+    <None Include="Properties\PublishProfiles\Remote.pubxml" />
+    <None Include="Properties\PublishProfiles\VPN.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
@@ -1699,7 +1616,6 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Mr\Create.cshtml" />
     <Content Include="Views\Mr\Delete.cshtml" />
-    <Content Include="Views\Mr\Details.cshtml" />
     <Content Include="Views\Mr\Edit.cshtml" />
     <Content Include="Views\Mr\Index.cshtml" />
     <Content Include="Views\Stock\Create.cshtml" />
@@ -1734,6 +1650,10 @@
     <Content Include="Views\Quotation\Search.cshtml" />
     <Content Include="Views\Quotation\Edit.cshtml" />
     <Content Include="Views\Quotation\_ViewQuotationPartial.cshtml" />
+    <Content Include="Views\Quotation\WorkOrder.cshtml" />
+    <Content Include="Views\Quotation\WorkOrders.cshtml" />
+    <Content Include="Views\Mr\Details.cshtml" />
+    <Content Include="Views\Shared\_CompanyPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1743,126 +1663,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706080932123_MangoInventoryV19.resx">
-      <DependentUpon>201706080932123_MangoInventoryV19.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706080958492_MangoInventoryV20.resx">
-      <DependentUpon>201706080958492_MangoInventoryV20.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706081000013_MangoInventoryV21.resx">
-      <DependentUpon>201706081000013_MangoInventoryV21.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706081000552_MangoInventoryV22.resx">
-      <DependentUpon>201706081000552_MangoInventoryV22.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706100407298_MangoInventoryV23.resx">
-      <DependentUpon>201706100407298_MangoInventoryV23.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706100511070_Initial.resx">
-      <DependentUpon>201706100511070_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706100515211_Initial1.resx">
-      <DependentUpon>201706100515211_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706100607482_MangoInventoryV24.resx">
-      <DependentUpon>201706100607482_MangoInventoryV24.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706100900168_MangoInventoryV25.resx">
-      <DependentUpon>201706100900168_MangoInventoryV25.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706100938303_MangoInventoryV26.resx">
-      <DependentUpon>201706100938303_MangoInventoryV26.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706101022346_MangoInventoryV27.resx">
-      <DependentUpon>201706101022346_MangoInventoryV27.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706101034117_MangoInventoryV28.resx">
-      <DependentUpon>201706101034117_MangoInventoryV28.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706110352385_MangoInventoryV29.resx">
-      <DependentUpon>201706110352385_MangoInventoryV29.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706110755462_MangoInventoryV30.resx">
-      <DependentUpon>201706110755462_MangoInventoryV30.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706110834166_MangoInventoryV31.resx">
-      <DependentUpon>201706110834166_MangoInventoryV31.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706110835551_MangoInventoryV32.resx">
-      <DependentUpon>201706110835551_MangoInventoryV32.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706110836418_MangoInventoryV33.resx">
-      <DependentUpon>201706110836418_MangoInventoryV33.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706110840484_MangoInventoryV34.resx">
-      <DependentUpon>201706110840484_MangoInventoryV34.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706110855316_MangoInventoryV35.resx">
-      <DependentUpon>201706110855316_MangoInventoryV35.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706111638198_MangoInventoryV36.resx">
-      <DependentUpon>201706111638198_MangoInventoryV36.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706120626124_MangoInventoryV37.resx">
-      <DependentUpon>201706120626124_MangoInventoryV37.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706120932333_MangoInventoryV38.resx">
-      <DependentUpon>201706120932333_MangoInventoryV38.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706140417110_MangoInventoryV39.resx">
-      <DependentUpon>201706140417110_MangoInventoryV39.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706140926557_MangoInventoryV44.resx">
-      <DependentUpon>201706140926557_MangoInventoryV44.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706140933071_MangoInventoryV45.resx">
-      <DependentUpon>201706140933071_MangoInventoryV45.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706140933578_MangoInventoryV46.resx">
-      <DependentUpon>201706140933578_MangoInventoryV46.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706140941061_MangoInventoryV47.resx">
-      <DependentUpon>201706140941061_MangoInventoryV47.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706140957174_MangoInventoryV48.resx">
-      <DependentUpon>201706140957174_MangoInventoryV48.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706141002281_MangoInventoryV49.resx">
-      <DependentUpon>201706141002281_MangoInventoryV49.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706141015084_MangoInventoryV50.resx">
-      <DependentUpon>201706141015084_MangoInventoryV50.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706170557293_MangoInventoryV51.resx">
-      <DependentUpon>201706170557293_MangoInventoryV51.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706171021393_MangoInventoryV52.resx">
-      <DependentUpon>201706171021393_MangoInventoryV52.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706171026042_MangoInventoryV53.resx">
-      <DependentUpon>201706171026042_MangoInventoryV53.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706180410132_MangoInventoryV54.resx">
-      <DependentUpon>201706180410132_MangoInventoryV54.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706180412441_MangoInventoryV55.resx">
-      <DependentUpon>201706180412441_MangoInventoryV55.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706180414254_MangoInventoryV56.resx">
-      <DependentUpon>201706180414254_MangoInventoryV56.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706180440294_MangoInventoryV5.resx">
-      <DependentUpon>201706180440294_MangoInventoryV5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706190641231_MangoInventoryV57.resx">
-      <DependentUpon>201706190641231_MangoInventoryV57.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706191020137_MangoInventoryV58.resx">
-      <DependentUpon>201706191020137_MangoInventoryV58.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706200134381_MangoInventoryV59.resx">
-      <DependentUpon>201706200134381_MangoInventoryV59.cs</DependentUpon>
-    </EmbeddedResource>
     <Content Include="Report\ReportQuotation.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportQuotation.cs</LastGenOutput>
@@ -1870,6 +1670,61 @@
     <Content Include="Report\ReportStock.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportStock.cs</LastGenOutput>
+    </Content>
+    <EmbeddedResource Include="Migrations\201706230339114_MangoInventoryV60.resx">
+      <DependentUpon>201706230339114_MangoInventoryV60.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707011027578_MangoInventoryV61.resx">
+      <DependentUpon>201707011027578_MangoInventoryV61.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707011128424_MangoInventoryV62.resx">
+      <DependentUpon>201707011128424_MangoInventoryV62.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707011208057_MangoInventoryV63.resx">
+      <DependentUpon>201707011208057_MangoInventoryV63.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707011214158_MangoInventoryV64.resx">
+      <DependentUpon>201707011214158_MangoInventoryV64.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707011219379_MangoInventoryV65.resx">
+      <DependentUpon>201707011219379_MangoInventoryV65.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707011221152_MangoInventoryV66.resx">
+      <DependentUpon>201707011221152_MangoInventoryV66.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707020325325_MangoInventoryV67.resx">
+      <DependentUpon>201707020325325_MangoInventoryV67.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707020331347_MangoInventoryV68.resx">
+      <DependentUpon>201707020331347_MangoInventoryV68.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707020336384_MangoInventoryV69.resx">
+      <DependentUpon>201707020336384_MangoInventoryV69.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707020338348_MangoInventoryV70.resx">
+      <DependentUpon>201707020338348_MangoInventoryV70.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707020356066_MangoInventoryV71.resx">
+      <DependentUpon>201707020356066_MangoInventoryV71.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707020413111_MangoInventoryV72.resx">
+      <DependentUpon>201707020413111_MangoInventoryV72.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707020415412_MangoInventoryV73.resx">
+      <DependentUpon>201707020415412_MangoInventoryV73.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707020417036_MangoInventoryV74.resx">
+      <DependentUpon>201707020417036_MangoInventoryV74.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707020419057_MangoInventoryV75.resx">
+      <DependentUpon>201707020419057_MangoInventoryV75.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707020514455_MangoInventoryV76.resx">
+      <DependentUpon>201707020514455_MangoInventoryV76.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="Report\ReportWorkOrder.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportWorkOrder.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

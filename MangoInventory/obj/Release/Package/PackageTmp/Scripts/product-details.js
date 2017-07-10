@@ -18,7 +18,7 @@
             success: function (data) {
                 $("#suggestionDiv").show();
                 $("#suggestionBody").show();
-                alert(data.Name);
+               // alert(data.Name);
                 $("#suggestionBody").append('<tr><td>' + data.Name + '</td></tr><tr><td>' + data.Model + '</td></tr>' +
                     '<tr><td>' + data.Brand + '</td></tr>');
             }

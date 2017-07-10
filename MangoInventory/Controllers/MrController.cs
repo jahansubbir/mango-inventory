@@ -20,28 +20,57 @@ namespace MangoInventory.Controllers
         MrManager mrManager=new MrManager();
         //private List<MrViewModel> mrList;
         private List<MR> mrs;
-        public List<MrView> mrList; 
+        public List<MrView> mrList;
+        private HttpContext context = System.Web.HttpContext.Current;
+        private HttpCookie cookie;
+        private int loggedIn;
+        private string userRole;
+
+        public MrController()
+        {
+            cookie = context.Request.Cookies["loginCookie"];
+            if (cookie != null)
+            {
+                loggedIn = Convert.ToInt32(cookie["loginStatus"]);
+                userRole = cookie["role"];
+            }
+
+        }
 
         // GET: /Mr/
+        public void Message()
+        {
+            TempData["message"] = "Please Login to continue";
+        }
         public ActionResult Index()
         {
+            ViewBag.Company = db.Companies.FirstOrDefault();
+            
             List<MrView> mrs = db.MrView.ToList();
+
             return View(mrs);
         }
 
         // GET: /Mr/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string mrNo)
         {
-            if (id == null)
+            if (mrNo == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MR mr = db.Mrs.Find(id);
-            if (mr == null)
+            var mrs = db.MrView.ToList();
+            ViewBag.Mr = mrs.Find(a => a.MRNo == mrNo);
+            /*if (mr == null)
             {
                 return HttpNotFound();
             }
-            return View(mr);
+            return View(mr);*/
+            mrs = mrs.Where(a => a.MRNo == mrNo).ToList();
+            if (mrs.Contains(null))
+            {
+                return HttpNotFound();
+            }
+            return View(mrs);
         }
 
         void DropdownLists()
@@ -58,8 +87,17 @@ namespace MangoInventory.Controllers
         // GET: /Mr/Create
         public ActionResult Create()
         {
-          DropdownLists();
-            return View();
+            if (loggedIn!=0)
+            {
+                DropdownLists();
+                return View();
+            }
+            else
+            {
+                Message();//["message"] = "Please Login to continue";
+                return RedirectToAction("Index", "Home");
+            }
+         
         }
 
         // POST: /Mr/Create
@@ -98,7 +136,7 @@ namespace MangoInventory.Controllers
                         Session["createMr"] = null;
                         Session["mr"] = null;
                        DropdownLists(mr); //ViewBag.ProductId = new SelectList(db.Products, "Id", "Model");
-                        return RedirectToAction("Index", new { mrNo = mr.MRNo });
+                        return RedirectToAction("Details", new { mrNo = mr.MRNo });
                     }
 
                     //return RedirectToAction("Index", new { mrNo = mr.MRNo });
@@ -119,17 +157,23 @@ namespace MangoInventory.Controllers
         // GET: /Mr/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (loggedIn!=0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                MR mr = db.Mrs.Find(id);
+                if (mr == null)
+                {
+                    return HttpNotFound();
+                }
+                DropdownLists(mr);// ViewBag.ProductId = new SelectList(db.Products, "Id", "Model", mr.ProductId);
+                return View(mr);
             }
-            MR mr = db.Mrs.Find(id);
-            if (mr == null)
-            {
-                return HttpNotFound();
-            }
-           DropdownLists(mr);// ViewBag.ProductId = new SelectList(db.Products, "Id", "Model", mr.ProductId);
-            return View(mr);
+            Message();
+            return RedirectToAction("Index", "Home");
+
         }
 
         // POST: /Mr/Edit/5

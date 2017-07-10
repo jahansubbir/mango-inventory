@@ -41,7 +41,7 @@ namespace MangoInventory.Models
         [StringLength(Int32.MaxValue, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string ConfirmPassword { get; set; }
 
-        public int Status { get; set; }
+        public string Status { get; set; }
 
         public Department Department { get; set; }
         public Designation Designation { get; set; }

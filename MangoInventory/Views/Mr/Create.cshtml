@@ -199,7 +199,8 @@
                                 // alert(epochDate);
                                 var myDate = new Date(epochDate * 1);
 
-                                $("#tableBody").append('<tr><td>' + myDate.toLocaleDateString() + '</td><td>' + value.Supplier + '</td><td>' + value.Model + '</td><td>' + value.Quantity + '</td><td>' + value.UnitPrice + '</td></tr>');
+                                //$("#tableBody").append('<tr><td>' + myDate.toLocaleDateString() + '</td><td>' + value.Supplier + '</td><td>' + value.Model + '</td><td>' + value.Quantity + '</td><td>' + value.UnitPrice + '</td></tr>');
+                                $("#tableBody").append('<tr><td>' + value.Name + '</td><td>' + value.Model + '</td><td>' + value.Quantity + '</td><td>' + value.UnitPrice + '</td></tr>');
 
                             });
 

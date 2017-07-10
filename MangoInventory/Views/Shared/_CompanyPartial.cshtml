@@ -1,0 +1,15 @@
+﻿@using MangoInventory.DBContext
+@using MangoInventory.Models
+@{
+    MangoDbContext db=new MangoDbContext();
+    Company company = db.Companies.FirstOrDefault();
+}
+<div class="w3-card-4" style="margin: 0 auto;">
+    <img src="@Url.Content("~/Images/" + company.Image)" width="100" style="float: left"/>
+</div>
+<div class="w3-card-4 navbar-fixed-bottom">
+    <h3 style="text-align: center">
+        @company.Name
+    </h3>
+    <p style="text-align: center"><label>Adress:</label>&nbsp;@company.Address &nbsp;&nbsp;<label>Contact No:</label>&nbsp; @company.ContactNo<br/><label>Email:</label>&nbsp;@company.Email &nbsp;&nbsp;<label>Web:</label>&nbsp;@company.Website</p>
+</div>

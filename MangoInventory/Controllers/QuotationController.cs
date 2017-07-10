@@ -37,7 +37,23 @@ namespace MangoInventory.Controllers
                 eId = Convert.ToInt32(cookie["eId"]);
             }
         }
-       
+
+        public ActionResult Index()
+        {
+            //int id = 2;
+            var quotation = db.Quotations.ToList();
+            
+
+            quotation = quotation.DistinctBy(a => a.QuotationId).OrderByDescending(a => a.Date).ThenBy(a => a.CompanyName).ToList();
+            return View(quotation);
+        }
+
+        public ActionResult WorkOrders()
+        {
+            var workOrders = db.WorkOrders.ToList();
+            workOrders = workOrders.DistinctBy(a => a.WorkOrderNo).OrderByDescending(a => a.QuotationId).ThenBy(a => a.WorkOrderNo).ToList();
+            return View(workOrders);
+        }
         public ActionResult Search(string quotationId)
         {
             var quotationViewModel = db.QuotationView.ToList();
@@ -46,25 +62,32 @@ namespace MangoInventory.Controllers
             return View(quotationViewModel);
         }
 
-        //public ActionResult Search(string quotationId)
-        //{
-        //    var quotationViewModel = db.QuotationView.ToList();
-        //    quotationViewModel = quotationViewModel.Where(q => q.QuotationId == quotationId).ToList();
-        //    ViewBag.Quotation = quotationViewModel.Find(a => a.QuotationId == quotationId);
-        //    return View(quotationViewModel);
-        //}
+        [HttpPost]
+        public ActionResult Search(WorkOrder work)
+        {
+            work.WorkOrderNo = "W-" + work.QuotationId;
+            ViewBag.Message =quotationManager.OrderWork(work);
 
-        //[HttpPost]
-        //public ActionResult Search(Quotation quotation)
-        //{
-        //    var message = quotationManager.Edit(quotation);
-        //    var quotationViewModel = db.QuotationView.ToList();
-        //    quotationViewModel = quotationViewModel.Where(q => q.QuotationId == quotation.QuotationId).ToList();
-        //    ViewBag.Quotation = quotationViewModel.Find(a => a.QuotationId == quotation.QuotationId);
-        //    return View(quotationViewModel);
+            if (ViewBag.Message != "Internal Work Order")
+            {
+                var quotationViewModel = db.QuotationView.ToList();
+                quotationViewModel = quotationViewModel.Where(q => q.QuotationId == work.QuotationId).ToList();
+                ViewBag.Quotation = quotationViewModel.Find(a => a.QuotationId == work.QuotationId);
+                return View(quotationViewModel);
+            }
+            return RedirectToAction("WorkOrder",new {id=work.QuotationId});
+            // return RedirectToAction("WorkOrder", new { id = work.WorkOrderNo });
+        }
 
-        //}
-        // GET: /Quotation/Details/5
+        public ActionResult WorkOrder(string id)
+        {
+            var workOrders = quotationManager.GeWorkOrderViews();
+            workOrders = workOrders.Where(a => a.QuotationId == id).ToList();
+            ViewBag.WorkOrder = workOrders.Find(a => a.QuotationId == id);
+            return View(workOrders);
+        }
+
+        
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -140,21 +163,42 @@ namespace MangoInventory.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,ContactPerson,CompanyName,Address,Date,CategoryId,SubCategoryId,TypeId,ProductId,Quantity,UnitPrice,EmployeeId,QuotationId,Status")] Quotation quotation)
+        public ActionResult Edit([Bind(Include="Id,ContactPerson,CompanyName,Address,Date,CategoryId,SubCategoryId,TypeId,ProductId,Quantity,UnitPrice,EmployeeId,QuotationId,Status")] Quotation qu)
         {
-            //if (ModelState.IsValid)
-            //{
-            /* ViewBag.Message*/
-             Quotation q= quotationManager.Edit(quotation);
-
-            List<QuotationView> quotations =db.QuotationView.Where(a => a.QuotationId == q.QuotationId).ToList();
-                ViewBag.Products = db.Products.ToList();
-                DropDownLists();
-                ViewBag.Quotation = quotations.Find(a => a.QuotationId == q.QuotationId);
-            return View(quotations);
-            //}
-            //DropDownLists(quotation);
-            //return View(quotation);
+            
+            Quotation quotation = db.Quotations.Find(qu.Id);
+            if (qu.ContactPerson==null)
+            {
+                qu.ContactPerson = quotation.ContactPerson;
+            }
+            if (qu.CompanyName == null)
+            {
+                qu.CompanyName = quotation.CompanyName;
+            }
+            if (qu.Address == null)
+            {
+                qu.Address = quotation.Address;
+            }
+            if (qu.Date==DateTime.MinValue)
+            {
+                qu.Date = quotation.Date;
+            }
+           
+            if (qu.Quantity == 0)
+            {
+                qu.Quantity = quotation.Quantity;
+            }
+            if (qu.UnitPrice == 0)
+            {
+                qu.UnitPrice = quotation.UnitPrice;
+            }
+           
+            //qu.QuotationId = quotationManager.GetQuotationId(qu);
+            var message = quotationManager.Edit(qu);
+            var quotationViewModel = db.QuotationView.ToList();
+            quotationViewModel = quotationViewModel.Where(q => q.QuotationId == qu.QuotationId).ToList();
+            ViewBag.Quotation = quotationViewModel.Find(a => a.QuotationId == qu.QuotationId);
+            return View(quotationViewModel);
         }
 
         public PartialViewResult /*ActionResult*/ ViewQuotation(Quotation qu)
@@ -202,71 +246,9 @@ namespace MangoInventory.Controllers
             db.SaveChanges();
             return RedirectToAction("Search");
         }
-        public ActionResult Index()
-        {
-            var quotation = db.Quotations.ToList();
-            quotation = quotation.DistinctBy(a => a.QuotationId).OrderByDescending(a => a.Date).ThenBy(a => a.CompanyName).ToList();
-            return View(quotation);
-        }
+     
 
-        //public ActionResult Index()
-        //{
-        //    var quotation = db.Quotations.ToList();
-        //    quotation = quotation.DistinctBy(a => a.QuotationId).OrderByDescending(a=>a.Date).ThenBy(a=>a.CompanyName).ToList();
-        //    return View(quotation);
-        //}
-
-        ////public ActionResult PrintQuotation()
-        ////{
-        ////    return View();
-        ////}
-
-        ////[WordDocument]
-        //public ActionResult PrintQuotation(string quotationId)
-        //{
-        //    //HttpCookie cookie = context.Request.Cookies["loginCookie"];
-        //    //quotationId = (string)cookie["QuotationId"];
-        //    var quotationViewModel = db.QuotationView.ToList();
-        //    quotationViewModel = quotationViewModel.Where(q => q.QuotationId == quotationId).ToList();
-        //    ViewBag.Model = quotationViewModel;
-        //    ViewBag.Quotation = quotationViewModel.Find(a => a.QuotationId == quotationId);
-
-        //   return View(quotationViewModel);
-        //   // return new ActionAsPdf("PrintQuotation", quotationViewModel);
-
-        //}
-
-        //public ActionResult Print(string quotationId)
-        //{
-        //    return new ActionAsPdf("PrintQuotation", new { quotationId=quotationId })
-        //    {
-        //        FileName = quotationId+".pdf"/*Server.MapPath("~/Rotativa/Downloads/"+quotationId+".pdf")*/
-        //    };
-
-        //}
-
-//        //[HttpPost]
-//        //[WordDocument]
-//        public ActionResult Print(string quotationId)
-//        {
-//            cookie["QuotationId"] = quotationId; //var word = new Microsoft.Office.Interop.Word.Application();
-//            //word.Visible = false;
-//            Response.Cookies.Add(cookie);
-//            var quotationViewModel = db.QuotationView.ToList();
-//            quotationViewModel = quotationViewModel.Where(q => q.QuotationId == quotationId).ToList();
-//            ViewBag.Model = quotationViewModel;
-//            ViewBag.Quotation = quotationViewModel.Find(a => a.QuotationId == quotationId);
-//            //var filePath = Server.MapPath("~/Quotation/Search/PrintQuotation.cshtml");
-//            //var savePathdoc = Server.MapPath("~/Report/"+quotationId+".docx");
-//            //var wordDoc = word.Documents.Open(FileName: filePath, ReadOnly: false);
-//            //wordDoc.SaveAs2(FileName: savePathdoc, FileFormat: WdSaveFormat.wdFormatXMLDocument);
-//            //return View();
-
-//            ViewBag.WordDocumentFilename = "Print";
-//            return new ActionAsPdf("PrintQuotation",quotationViewModel);
-//}
-
-        //[HttpPost]
+       
         public ActionResult Report(string quotationId,string type)
         {
             var quotation = db.QuotationView.ToList();
@@ -302,6 +284,42 @@ namespace MangoInventory.Controllers
                 return File(stream, "application/pdf", "" + quotationId + ".pdf");
             }
            
+        }
+        public ActionResult ReportWorkOrder(string workOrderNo, string type)
+        {
+            var workOrders = quotationManager.GeWorkOrderViews().ToList();
+            workOrders = workOrders.Where(a => a.WorkOrderNo == workOrderNo).ToList();
+            ReportDocument reportDocument = new ReportDocument();
+            reportDocument.Load(Path.Combine(Server.MapPath("~/Report"), "ReportWorkOrder.rpt"));
+            reportDocument.SetDataSource(workOrders);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            if (type.Equals("Word"))
+            {
+                Stream stream = reportDocument.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
+                // Stream stream1 = reportDocument.ExportToStream(CrystalDecisions.Shared.ExportFormatType.);
+                stream.Seek(0, SeekOrigin.Begin);
+
+                return File(stream, "application/pdf", "" + workOrderNo + ".doc");
+            }
+            if (type.Equals("Excel"))
+            {
+                Stream stream = reportDocument.ExportToStream(CrystalDecisions.Shared.ExportFormatType.Excel);
+                // Stream stream1 = reportDocument.ExportToStream(CrystalDecisions.Shared.ExportFormatType.);
+                stream.Seek(0, SeekOrigin.Begin);
+
+                return File(stream, "application/pdf", "" + workOrderNo + ".xls");
+            }
+            else
+            {
+                Stream stream = reportDocument.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                // Stream stream1 = reportDocument.ExportToStream(CrystalDecisions.Shared.ExportFormatType.);
+                stream.Seek(0, SeekOrigin.Begin);
+
+                return File(stream, "application/pdf", "" + workOrderNo + ".pdf");
+            }
+
         }
 
         protected override void Dispose(bool disposing)
@@ -363,6 +381,7 @@ namespace MangoInventory.Controllers
             return Json(message, JsonRequestBehavior.AllowGet);
 
         }
-       
+
+      
     }
 }

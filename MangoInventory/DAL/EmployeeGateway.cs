@@ -61,5 +61,17 @@ namespace MangoInventory.DAL
             // Return the hexadecimal string.
             return sBuilder.ToString();
         }
+
+        //public string GetEmployeeStatus(string userId)
+        //{
+        //    var employees = db.Employees.ToList();
+        //    var employee = employees.Find(a => a.EmpId == userId);
+        //    int status = employee.Status;
+        //    //if (st)
+        //    //{
+                
+        //    //}
+        //    return status.ToString();
+        //}
     }
 }
